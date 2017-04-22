@@ -1,15 +1,44 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <el-button @click.native="startHacking">Let's do it</el-button>
+  <div class="wrap">
+    <el-row  class="container">
+      <el-col :span="4" class="wrap-menu">
+        <xmenu :base-info="base"></xmenu>
+      </el-col>
+      <el-col :span="20" class="main">
+        <xhead></xhead>
+        <!-- <xmain></xmain> -->
+         <router-view></router-view>
+        <!-- <el-button @click.native="startHacking">Let's do it</el-button> -->
+      </el-col>
+      <!-- <img src="./assets/logo.png"> -->
+      <!-- <h1>{{ msg }}</h1> -->
+
+
+    </el-row>
   </div>
 </template>
-
 <script>
+import xmenu from './components/menu.vue';
+import xhead from './components/header.vue';
+// import xhead from './components/header.vue';
+
 export default {
+components:{
+  xmenu,xhead
+},
   data () {
     return {
+      base:{
+        menu:[{
+          children:[{
+
+          }],
+          icon: '',
+          id: 1,
+          name:'用户管理',
+          url: ''
+        }]
+      },
       msg: 'Use Vue 2.0 Today!'
     }
   },

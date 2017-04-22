@@ -1,0 +1,38 @@
+html,body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  /*overflow: hidden;*/
+}
+
+.container, .wrap-menu,.main{
+  height: 100%;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.wrap{
+  height: 100%;
+}
+.menu{
+  height: 100%;
+  background: #e4e8f1;
+
+}
+.main-header{
+  height: 56px;
+  line-height: 56px;
+  background: #eee;
+}
+
+@media (max-width: 768px) {
+  .wrap-menu{
+    /*display: none;*/
+    width: 0;
+    overflow: hidden;
+  }
+  .main{
+    width: 100%
+  }
+}
