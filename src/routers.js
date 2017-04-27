@@ -1,6 +1,8 @@
 // 欢迎页
 const Home = r => require.ensure([], () => r(require('./view/home.vue')), 'group-home');
 
+const Teacher = r => require.ensure([], () => r(require('./view/teacher/teacher.vue')), 'group-teacher');
+
 var routes = [
   {
     path: '/',
@@ -9,6 +11,10 @@ var routes = [
   {
     path: '/home',
     component: Home
+  },
+  {
+    path: '/teacher',
+    component: Teacher
   }
 ];
 
