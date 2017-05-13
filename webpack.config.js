@@ -8,14 +8,13 @@ const publicPath = ''
 
 module.exports = (options = {}) => ({
   entry: {
-    vendor: './src/vendor',
     index: './src/main.js'
   },
   output: {
     path: resolve(__dirname, 'dist'),
-    filename: options.dev ? '[name].js' : '[name].js?[chunkhash]',
-    chunkFilename: '[id].js?[chunkhash]',
-    publicPath: options.dev ? '/assets/' : publicPath
+    publicPath: options.dev ? '/assets/' : publicPath,
+    filename: options.dev ? '[name].js' : './static/[name].js?[chunkhash]',
+    chunkFilename: './static/[name].js?[chunkhash]',
   },
   module: {
     rules: [{
@@ -64,7 +63,7 @@ module.exports = (options = {}) => ({
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor', 'manifest']
+      names: ['manifest']
     }),
     new HtmlWebpackPlugin({
       template: 'src/index.html'
@@ -80,7 +79,7 @@ module.exports = (options = {}) => ({
     port: 8010,
     proxy: {
       '/api/': {
-        target: 'http://127.0.0.1:8080',
+        target: 'http://127.0.0.1:8010',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
@@ -91,5 +90,5 @@ module.exports = (options = {}) => ({
       index: url.parse(options.dev ? '/assets/' : publicPath).pathname
     }
   },
-  devtool: options.dev ? '#eval-source-map' : '#source-map'
+  // devtool: options.dev ? '#eval-source-map' : '#source-map'
 })

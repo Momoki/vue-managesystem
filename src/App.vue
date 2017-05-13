@@ -18,7 +18,6 @@
 <script>
 import xmenu from './components/menu.vue';
 import xhead from './components/header.vue';
-// import xhead from './components/header.vue';
 
 export default {
     components: {

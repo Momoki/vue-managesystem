@@ -2,9 +2,10 @@ import Vue from 'vue'
 
 import ElementUI from 'element-ui'
 
-import 'element-ui/lib/theme-default/index.css'
+// import 'element-ui/lib/theme-default/index.css'
 
-// import '../c/index2.css'
+import './c/index2.css'
+
 import './c/index.css'
 
 import VueRouter from 'vue-router';
