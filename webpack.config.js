@@ -13,8 +13,8 @@ module.exports = (options = {}) => ({
   output: {
     path: resolve(__dirname, 'dist'),
     publicPath: options.dev ? '/assets/' : publicPath,
-    filename: options.dev ? '[name].js' : './static/[name].js?[chunkhash]',
-    chunkFilename: './static/[name].js?[chunkhash]',
+    filename: options.dev ? '[name].js' : './js/[name].js?[chunkhash]',
+    chunkFilename: './js/[name].js?[chunkhash]',
   },
   module: {
     rules: [{
