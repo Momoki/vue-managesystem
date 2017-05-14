@@ -9,49 +9,51 @@
       </el-breadcrumb>
     </div>
     <div class="list">
-      <el-form :model="searchform">
-        <el-row class="search">
-          <el-col :span="8">
-            <el-form-item label="学号">
-              <el-input v-model="searchform.number"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="姓名">
-              <el-input v-model="searchform.user"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="班级">
-              <el-cascader
-                :options="classData"
-                v-model="searchform.oClass"
-              >
-              </el-cascader>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="实习状态">
-              <el-select v-model="searchform.status" clearable placeholder="请选择">
-                <el-option
-                  label="实习中"
-                  value="0">
-                </el-option>
-                <el-option
-                  label="未实习"
-                  value="1">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <div style="color:#fff">1</div>
-          </el-col>
-          <el-col :span="8">
-            <el-button type="primary">搜索</el-button>
-          </el-col>
-        </el-row>
-      </el-form>
+      <div class="search">
+        <el-form :model="searchform">
+         <el-row>
+           <el-col :span="8">
+             <el-form-item label="学号">
+               <el-input v-model="searchform.number"></el-input>
+             </el-form-item>
+           </el-col>
+           <el-col :span="8">
+             <el-form-item label="姓名">
+               <el-input v-model="searchform.user"></el-input>
+             </el-form-item>
+           </el-col>
+           <el-col :span="8">
+             <el-form-item label="班级">
+               <el-cascader
+                 :options="classData"
+                 v-model="searchform.oClass"
+               >
+               </el-cascader>
+             </el-form-item>
+           </el-col>
+           <el-col :span="8">
+             <el-form-item label="实习状态">
+               <el-select v-model="searchform.status" clearable placeholder="请选择">
+                 <el-option
+                   label="实习中"
+                   value="0">
+                 </el-option>
+                 <el-option
+                   label="未实习"
+                   value="1">
+                 </el-option>
+               </el-select>
+             </el-form-item>
+           </el-col>
+           <el-col :span="8">
+             <div style="color:#fff">1</div>
+           </el-col>
+           <el-col :span="8">
+             <el-button type="primary">搜索</el-button>
+           </el-col>
+         </el-row>
+        </el-form>
+      </div>
       <div class="fast-search">
         <span>快捷搜索：</span>
         <el-button type="text">全部</el-button>
