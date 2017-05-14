@@ -1,7 +1,7 @@
 /* ==========================================================
  * v
  * ==========================================================
- * Copyright qly
+ * Copyright aqi
  *
  *
  * ========================================================== */
@@ -26,7 +26,10 @@
       var self = this;
       // input输入事件
       ui.$loginForm.on("input", "input", function() {
+        // 重置error
         self.fClearError($(this).parent().attr("id"))
+        // 重置tip
+        ui.$tip.html("")
       })
       // 提交按钮点击事件
       ui.$loginBtn.on("click", function() {
@@ -50,8 +53,6 @@
           },
           "data": loginData
         }
-        // 重置tip
-        ui.$tip.html("")
         // ajax状态显示
         ajaxing = true;
         ui.$loginBtn.html('<div class="spinner"></div>登录中')
