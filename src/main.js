@@ -2,6 +2,8 @@ import Vue from 'vue'
 
 import ElementUI from 'element-ui'
 
+import axios from 'axios';
+
 // import 'element-ui/lib/theme-default/index.css'
 
 import './c/index2.css'

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server -d --inline --hot --env.dev",
     "dist": "rimraf dist && webpack -p --progress --hide-modules",
-	"build": "rimraf build && webpack -p --progress --hide-modules"
+    "build": "rimraf build && webpack -p --progress --hide-modules"
   },
   "dependencies": {
     "element-ui": "^1.1.2",
@@ -19,6 +19,7 @@
     "array-flatten": "^2.1.1",
     "async": "^2.3.0",
     "autoprefixer": "^6.6.0",
+    "axios": "^0.16.1",
     "babel-core": "^6.21.0",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^6.4.1",
