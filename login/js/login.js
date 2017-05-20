@@ -46,7 +46,7 @@
         let settings = {
           "async": true,
           "crossDomain": true,
-          "url": "//139.129.37.224:8080/practice/auth/i/account/login",
+          "url": "http://139.129.37.224:8080/practice/auth/i/account/login",
           "method": "POST",
           "headers": {
             "content-type": "application/x-www-form-urlencoded"
