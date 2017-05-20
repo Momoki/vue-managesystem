@@ -46,7 +46,7 @@
         let settings = {
           "async": true,
           "crossDomain": true,
-          "url": "http://139.129.37.224:8080/practice/auth/i/account/login",
+          "url": "//139.129.37.224:8080/practice/auth/i/account/login",
           "method": "POST",
           "headers": {
             "content-type": "application/x-www-form-urlencoded"
@@ -61,7 +61,9 @@
           $.ajax(settings).done(function(res) {
             if (res.error == undefined) {
               ui.$loginBtn.html("登录成功:)")
+			  var url = '../dist/index.html';
               // window.location = res.data.items[0].url;
+			  window.location = url;
             } else {
               self.fShowAjaxError(res.error);
               ui.$loginBtn.html("登录")
