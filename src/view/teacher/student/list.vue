@@ -49,7 +49,7 @@
              <div style="color:#fff">1</div>
            </el-col>
            <el-col :span="8">
-             <el-button type="primary" @click=loadData>搜索</el-button>
+             <el-button type="primary" @click="loadData">搜索</el-button>
            </el-col>
          </el-row>
         </el-form>
@@ -114,7 +114,7 @@ export default {
         class_index: null, //选填，班级号
         name: '', //选填，学生姓名，存在时其他条件筛选将不起作用
         status: null, //实习状态
-        oClass: null
+        oClass: [],
       },
       tableData: [{
         num: '130708122',

@@ -1,67 +1,71 @@
 <template>
-  <!-- <el-row class="tac"> -->
-    <!-- <el-col :span="8"> -->
-      <!-- <h5>带 icon</h5> -->
-      <div class="menu">
-        <div class="user-info">
-          你好,
-          <h3>喻文老师</h3>
-          <el-button type="text">退出登录</el-button>
-        </div>
+<!-- <el-row class="tac"> -->
+<!-- <el-col :span="8"> -->
+<!-- <h5>带 icon</h5> -->
+<div class="menu">
+  <div class="user-info">你好,
+    <h3>喻文老师</h3>
+    <el-button type="text">退出登录</el-button>
+  </div>
+<!--default-active="1-1"  -->
+  <el-menu class="el-menu-vertical-demo" :router="true" :unique-opened="true">
+    <el-submenu index="1">
+      <template slot="title">学生管理</template>
+      <el-menu-item-group>
+        <el-menu-item index="1-1" :route="{path: '/teacher/student/import'}">导入学生信息</el-menu-item>
+        <el-menu-item index="1-2" :route="{path: '/teacher/student/list'}">学生列表</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="2">
+      <template slot="title">实习管理</template>
+      <el-menu-item-group>
+        <el-menu-item index="2-1" :route="{path: '/teacher/intern/chart'}">实习状态图表</el-menu-item>
+        <el-menu-item index="2-2" :route="{path: '/teacher/intern/list'}">实习周记</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="3">
+      <template slot="title">校企合作</template>
+      <el-menu-item-group>
+        <el-menu-item index="3-1" :route="{path: '/cooperation/intention'}">合作意向管理</el-menu-item>
+        <el-menu-item index="3-2" :route="{path: '/cooperation/enterprise'}">合作企业管理</el-menu-item>
+        <el-menu-item index="3-3" :route="{path: '/cooperation/job'}">职位管理</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="4">
+      <template slot="title">短学期管理</template>
+      <el-menu-item-group>
+        <el-menu-item index="4-1" :route="{path: '/short/list'}">短学期列表</el-menu-item>
+        <el-menu-item index="4-2" :route="{path: '/short/myterm'}">我的课程</el-menu-item>
 
-        <el-menu default-active="1-1" class="el-menu-vertical-demo" :router="true">
-          <el-submenu index="1">
-            <template slot="title">学生管理</template>
-            <el-menu-item-group>
-              <!-- <template slot="title">学生管理</template> -->
-            <el-menu-item index="1-1" :route="{path: '/home'}">导入学生信息</el-menu-item>
-              <el-menu-item index="1-2" :route="{path: '/teacher/studentmanage/list'}">学生列表</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title">实习管理</template>
-            <el-menu-item-group>
-              <template slot="title">学生管理</template>
-            <el-menu-item index="2-1" :route="{path: '/home'}">导入学生信息</el-menu-item>
-              <el-menu-item index="2-2" :route="{path: '/teacher'}">学生列表</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title">校企合作</template>
-            <el-menu-item-group>
-              <template slot="title">学生管理</template>
-            <el-menu-item index="3-1" :route="{path: '/home'}">导入学生信息</el-menu-item>
-              <el-menu-item index="3-2" :route="{path: '/teacher'}">学生列表</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="4">
-            <template slot="title">短学期管理</template>
-            <el-menu-item-group>
-              <template slot="title">学生管理</template>
-            <el-menu-item index="4-1" :route="{path: '/home'}">导入学生信息</el-menu-item>
-              <el-menu-item index="4-2" :route="{path: '/teacher'}">学生列表</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-        </el-menu>
+      </el-menu-item-group>
+    </el-submenu>
+    <el-submenu index="5">
+      <template slot="title">账户管理</template>
+      <el-menu-item-group>
+        <el-menu-item index="5-1" :route="{path: '/base/info'}">基本信息</el-menu-item>
+        <el-menu-item index="5-2" :route="{path: '/base/pass'}">修改密码</el-menu-item>
+      </el-menu-item-group>
+    </el-submenu>
+  </el-menu>
 
-      </div>
+</div>
 
-      <!-- {{baseInfo}} -->
-    <!-- </el-col> -->
+<!-- {{baseInfo}} -->
+<!-- </el-col> -->
 
-  <!-- </el-row> -->
+<!-- </el-row> -->
 </template>
 <style media="screen">
 </style>
 <script>
 export default {
   props: ['baseInfo'],
-  data(){
+  data() {
     return {
       // home: ['/home']
 
     }
   },
-  computed:{}
+  computed: {}
 }
 </script>

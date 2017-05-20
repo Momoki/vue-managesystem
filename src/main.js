@@ -4,8 +4,10 @@ import ElementUI from 'element-ui'
 
 import axios from 'axios';
 
-// import 'element-ui/lib/theme-default/index.css'
+import './urlConfig.js';
 
+// import 'element-ui/lib/theme-default/index.css'
+// 57, 197, 187
 import './c/index2.css'
 
 import './c/index.css'
@@ -14,7 +16,6 @@ import VueRouter from 'vue-router';
 import configRouter from './routers.js';
 
 import App from './App.vue'
-
 Vue.use(ElementUI)
 
 Vue.use(VueRouter);
