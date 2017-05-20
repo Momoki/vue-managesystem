@@ -210,6 +210,14 @@ export default {
   },
   computed: {
     gradeList(){
+      axios.get(urlConfig(""))
+      .then(function (response) {
+        console.log(response);
+        console.log("a");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
       let res = {
         "data":{
           "items":[{
@@ -283,7 +291,8 @@ export default {
   methods: {
     loadData(){
       console.log(this.searchform);
-      axios.get('http://139.129.37.224:8080/teacher/i/cooperation/list', {params: this.searchform
+      console.log(document.cookie);
+      axios.get(urlConfig("studentlist"), {params: this.searchform
     })
       .then(function (response) {
         console.log(response);

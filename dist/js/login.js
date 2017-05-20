@@ -61,9 +61,10 @@
           $.ajax(settings).done(function(res) {
             if (res.error == undefined) {
               ui.$loginBtn.html("登录成功:)")
+			  console.log(document.cookie);
 			  var url = './index.html';
               // window.location = res.data.items[0].url;
-			  window.location = url;
+			  // window.location = url;
             } else {
               self.fShowAjaxError(res.error);
               ui.$loginBtn.html("登录")

@@ -1,5 +1,5 @@
 //ajax配置
-var BASE_URL = 'http://139.129.37.224:8080';
+var BASE_URL = 'http://practice.ayuya.me';
 window.urlConfig =  function(url){
   switch(url){
     //班级列表
@@ -10,7 +10,8 @@ window.urlConfig =  function(url){
       return BASE_URL + '/view/i/college/major/list';
     // case expression:
     // case 'studentlist'
-
+    case 'studentlist':
+      return BASE_URL + '/teacher/i/student/list';
   }
   console.log("地址参数错误");
 }
