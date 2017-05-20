@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="">
     <div style="margin-bottom:10px;padding:20px;">
-      <h2 style="margin-top:0">学生信息</h2>
+      <h2 style="margin-top:0">学生列表</h2>
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
         <el-breadcrumb-item>学生管理</el-breadcrumb-item>
@@ -13,22 +13,37 @@
         <el-form :model="searchform">
          <el-row>
            <el-col :span="8">
-             <el-form-item label="学号">
-               <el-input v-model="searchform.number"></el-input>
-             </el-form-item>
-           </el-col>
-           <el-col :span="8">
              <el-form-item label="姓名">
                <el-input v-model="searchform.name"></el-input>
              </el-form-item>
            </el-col>
+           <!-- <el-cascader
+           :options="classData"
+           v-model="searchform.oClass"
+           >
+         </el-cascader> -->
+           <el-col :span="8">
+             <el-form-item label="专业">
+               <el-select v-model="searchform.grade" placeholder="请选择专业">
+                 <el-option
+                   v-for="item in gradeList"
+                   :key="item.value"
+                   :label="item.label"
+                   :value="item.value">
+                 </el-option>
+               </el-select>
+             </el-form-item>
+           </el-col>
            <el-col :span="8">
              <el-form-item label="班级">
-               <el-cascader
-                 :options="classData"
-                 v-model="searchform.oClass"
-               >
-               </el-cascader>
+               <el-select v-model="searchform.oClass" placeholder="请选择班级">
+                 <el-option
+                   v-for="item in classList"
+                   :key="item.value"
+                   :label="item.label"
+                   :value="item.value">
+                 </el-option>
+               </el-select>
              </el-form-item>
            </el-col>
            <el-col :span="8">
@@ -46,8 +61,13 @@
              </el-form-item>
            </el-col>
            <el-col :span="8">
-             <div style="color:#fff">1</div>
+             <el-form-item label="学号">
+               <el-input v-model="searchform.number"></el-input>
+             </el-form-item>
            </el-col>
+           <!-- <el-col :span="8">
+             <div style="color:#fff">&nbsp;</div>
+           </el-col> -->
            <el-col :span="8">
              <el-button type="primary" @click="loadData">搜索</el-button>
            </el-col>
@@ -66,15 +86,11 @@
         </el-table-column>
         <el-table-column prop="name" label="姓名" width="120">
         </el-table-column>
-        <el-table-column prop="grade" label="年级" width="80" show-overflow-tooltip>
-        </el-table-column>
-        <el-table-column prop="pro" label="专业" width="120" show-overflow-tooltip>
-        </el-table-column>
         <el-table-column
-         prop="class"
-         label="班级"
-         width="80"
-         show-overflow-tooltip>
+          prop="class"
+          label="班级"
+          width="80"
+          show-overflow-tooltip>
         </el-table-column>
         <el-table-column
          prop="status"
@@ -96,6 +112,7 @@
        layout="prev, pager, next"
        :page-count="20">
       </el-pagination>
+
    </div>
   </div>
 </template>
@@ -114,7 +131,7 @@ export default {
         class_index: null, //选填，班级号
         name: '', //选填，学生姓名，存在时其他条件筛选将不起作用
         status: null, //实习状态
-        oClass: [],
+        oClass: null
       },
       tableData: [{
         num: '130708122',
@@ -153,14 +170,14 @@ export default {
           value: '13',
           label: '13级',
           children: [{
-              value: 'shejiyuanze',
+              value: '0708',
               label: '网络工程',
               children: [{
-                  value: 'yiban',
+                  value: '1',
                   label: '1班'
                 },
                 {
-                  value: 'erban',
+                  value: '2',
                   label: '2班'
                 }
               ]
@@ -191,6 +208,78 @@ export default {
       value5: []
     }
   },
+  computed: {
+    gradeList(){
+      let res = {
+        "data":{
+          "items":[{
+            "grade":12,"major":"0207",
+            "class_index":1,"classname":"12数字媒体技术1班"
+          },
+          {
+            "grade":12,"major":"0207","class_index":2,"classname":"12数字媒体技术2班"
+          },
+          {
+            "grade":13,"major":"0207","class_index":1,"classname":"13数字媒体技术1班"
+          }]
+        }
+      }
+      let grade = [];
+      let gradeList = [];
+      let flag = 0;
+      let temp = res.data.items;
+      for(let i = 0;i < temp.length; i++){
+        flag = 0;
+        for(let j = 0;j < grade.length; j++){
+          if(grade[j] == temp[i].grade){
+            flag = 1;
+          }
+        }
+        if(flag == 0){
+          grade.push(temp[i].grade)
+        }
+      }
+      for(let i = 0;i < grade.length; i++){
+        gradeList.push({
+          value: grade[i],
+          label: grade[i] + '级'
+        })
+      }
+      console.log(gradeList);
+      return gradeList
+    },
+    classList(){
+      let res = {
+        "data":{
+          "items":[{
+            "grade":12,"major":"0207",
+            "class_index":1,"classname":"12数字媒体技术1班"
+          },
+          {
+            "grade":12,"major":"0207","class_index":2,"classname":"12数字媒体技术2班"
+          },
+          {
+            "grade":13,"major":"0207","class_index":1,"classname":"13数字媒体技术1班"
+          }]
+        }
+      }
+      let classList = [];
+      let flag = 0;
+      let temp = res.data.items;
+      for(let i = 0;i < temp.length; i++){
+        classList.push({
+          value: {
+            "grade": temp[i].grade,
+            "major": temp[i].major,
+            "class_index": temp[i].class_index
+          },
+          label: temp[i].classname
+        })
+      }
+      console.log(classList);
+      return classList
+    }
+  },
   methods: {
     loadData(){
       console.log(this.searchform);
@@ -208,7 +297,8 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-    }
+    },
+
   }
 }
 </script>
