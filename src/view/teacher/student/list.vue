@@ -10,23 +10,39 @@
     </div>
     <div class="list">
       <div class="search">
-        <el-form :model="searchform">
+        <el-form :model="searchform" ref="searchform">
          <el-row>
            <el-col :span="8">
-             <el-form-item label="姓名">
-               <el-input v-model="searchform.name"></el-input>
+             <el-form-item label="年级">
+               <el-select v-model="searchform.grade" @click="majorList" clearable placeholder="请选择年级">
+                 <el-option
+                   key="12"
+                   label="12级"
+                   value="12">
+                 </el-option>
+                 <el-option
+                   key="13"
+                   label="13级"
+                   value="13">
+                 </el-option>
+                 <el-option
+                   key="14"
+                   label="14级"
+                   value="14">
+                 </el-option>
+                 <el-option
+                     key="15"
+                     label="15级"
+                     value="15">
+                 </el-option>
+               </el-select>
              </el-form-item>
            </el-col>
-           <!-- <el-cascader
-           :options="classData"
-           v-model="searchform.oClass"
-           >
-         </el-cascader> -->
            <el-col :span="8">
              <el-form-item label="专业">
-               <el-select v-model="searchform.grade" placeholder="请选择专业">
+               <el-select v-model="searchform.major" clearable placeholder="请选择专业">
                  <el-option
-                   v-for="item in gradeList"
+                   v-for="item in majorList"
                    :key="item.value"
                    :label="item.label"
                    :value="item.value">
@@ -36,7 +52,7 @@
            </el-col>
            <el-col :span="8">
              <el-form-item label="班级">
-               <el-select v-model="searchform.oClass" placeholder="请选择班级">
+               <el-select v-model="searchform.oClass" clearable placeholder="请选择班级">
                  <el-option
                    v-for="item in classList"
                    :key="item.value"
@@ -50,67 +66,64 @@
              <el-form-item label="实习状态">
                <el-select v-model="searchform.status" clearable placeholder="请选择">
                  <el-option
-                   label="实习中"
+                   label="尚未实习"
                    value="0">
                  </el-option>
                  <el-option
-                   label="未实习"
+                   label="实习中"
                    value="1">
+                 </el-option>
+                 <el-option
+                   label="实习完成"
+                   value="2">
+                 </el-option>
+                 <el-option
+                   label="实习完成并已评分"
+                   value="3">
                  </el-option>
                </el-select>
              </el-form-item>
            </el-col>
            <el-col :span="8">
-             <el-form-item label="学号">
-               <el-input v-model="searchform.number"></el-input>
+             <el-form-item label="姓名">
+               <el-input v-model="searchform.name"></el-input>
              </el-form-item>
            </el-col>
            <!-- <el-col :span="8">
              <div style="color:#fff">&nbsp;</div>
            </el-col> -->
            <el-col :span="8">
-             <el-button type="primary" @click="loadData">搜索</el-button>
+             <el-button type="primary" @click="loadSearch">搜索</el-button>
            </el-col>
          </el-row>
         </el-form>
       </div>
       <div class="fast-search">
         <span>快捷搜索：</span>
-        <el-button type="text">全部</el-button>
-        <el-button type="text">毕业班</el-button>
-        <el-button type="text">非毕业班</el-button>
+        <el-button type="text" @click="loadAll">全部</el-button>
+        <el-button type="text" @click="loadGra">毕业班</el-button>
       </div>
 
       <el-table :data="tableData" border tooltip-effect="dark" style="width: 100%">
-        <el-table-column prop="num" label="学号" width="120">
+        <el-table-column prop="number" label="学号" width="120">
         </el-table-column>
         <el-table-column prop="name" label="姓名" width="120">
         </el-table-column>
-        <el-table-column
-          prop="class"
-          label="班级"
-          width="80"
-          show-overflow-tooltip>
+        <el-table-column prop="grade" label="年级" width="80" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column
-         prop="status"
-         label="实习状态"
-         width="100"
-         show-overflow-tooltip>
+        <el-table-column prop="major" label="专业" show-overflow-tooltip>
         </el-table-column>
-        <el-table-column
-         prop="address"
-         label="实习公司"
-         show-overflow-tooltip>
+        <el-table-column prop="class_index" label="班级" width="80" show-overflow-tooltip>
+        </el-table-column>
+        <el-table-column prop="status" label="实习状态" show-overflow-tooltip>
         </el-table-column>
       </el-table>
       <el-pagination
-       @size-change="handleSizeChange"
        @current-change="handleCurrentChange"
-       :current-page.sync="currentPage"
+       :current-page.sync="page_index"
        :page-size="10"
        layout="prev, pager, next"
-       :page-count="20">
+       :page-count="total_pages">
       </el-pagination>
 
    </div>
@@ -123,7 +136,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      currentPage: 1,
+      page_index: 1,
+      total_pages: 1,
       searchform: {
         number: '', //学号
         grade: null, //年级，选填，is_graduating 为 true 时将不起作用
@@ -131,151 +145,115 @@ export default {
         class_index: null, //选填，班级号
         name: '', //选填，学生姓名，存在时其他条件筛选将不起作用
         status: null, //实习状态
-        oClass: null
+        oClass: null,
       },
-      tableData: [{
-        num: '130708122',
-        name: '王虎',
-        grade: '13级',
-        pro: '网络工程',
-        class: '1班',
-        status: '实习中',
-        address: '杭州XX网络技术有限公司'
-      }, {
-        num: '130708124',
-        name: '张菁菁',
-        grade: '13级',
-        pro: '网络工程',
-        class: '1班',
-        status: '未实习',
-        address: '/'
-      }, {
-        num: '130708125',
-        name: '黄正',
-        grade: '13级',
-        pro: '网络工程',
-        class: '1班',
-        status: '实习中',
-        address: '上海XX文化传播有限公司'
-      }, {
-        num: '130708126',
-        name: '李莉',
-        grade: '13级',
-        pro: '网络工程',
-        class: '1班',
-        status: '实习中',
-        address: '浙江广播电视集团'
-      }],
-      classData: [{
-          value: '13',
-          label: '13级',
-          children: [{
-              value: '0708',
-              label: '网络工程',
-              children: [{
-                  value: '1',
-                  label: '1班'
-                },
-                {
-                  value: '2',
-                  label: '2班'
-                }
-              ]
-            },
-            {
-              value: 'daohang',
-              label: '信息系统管理与设计',
-              children: [{
-                value: 'all',
-                label: '全部'
-              }]
-            }
-          ]
-        },
-        {
-          value: '14',
-          label: '14级'
-        },
-        {
-          value: '15',
-          label: '15级'
-        },
-        {
-          value: '16',
-          label: '16级'
-        }
-      ],
-      value5: []
+      form: {},
+      tableData: [],
+      majorList: [],
+      classList: [],
     }
   },
   computed: {
-    gradeList(){
-      axios.get(urlConfig(""))
-      .then(function (response) {
-        console.log(response);
-        console.log("a");
+
+  },
+  methods: {
+    loadAll(){
+      var self = this;
+      self.$refs['searchform'].resetFields();
+      self.form = {}
+      self.page_index = 1;
+      self.loadData();
+    },
+    loadGra(){
+      var self = this;
+      self.$refs['searchform'].resetFields();
+      self.form ={
+        is_graduating: true
+      }
+      self.page_index = 1;
+      self.loadData()
+    },
+    loadSearch(){
+      var self = this;
+      self.form = self.searchform;
+      self.page_index = 1;
+      self.loadData()
+    },
+    loadData(){
+      var self = this;
+      let searchform = self.form;
+      searchform.page_index = self.page_index
+      searchform.total_pages = self.total_pages
+      axios.get( urlConfig("studentlist"),{ params: searchform})
+      .then(function (res) {
+        self.total_pages = res.data.data.total_pages;
+        self.tableData = res.data.data.items;
+        self.tableformat();
       })
       .catch(function (error) {
         console.log(error);
       });
-      let res = {
-        "data":{
-          "items":[{
-            "grade":12,"major":"0207",
-            "class_index":1,"classname":"12数字媒体技术1班"
-          },
-          {
-            "grade":12,"major":"0207","class_index":2,"classname":"12数字媒体技术2班"
-          },
-          {
-            "grade":13,"major":"0207","class_index":1,"classname":"13数字媒体技术1班"
-          }]
-        }
-      }
-      let grade = [];
-      let gradeList = [];
-      let flag = 0;
-      let temp = res.data.items;
-      for(let i = 0;i < temp.length; i++){
-        flag = 0;
-        for(let j = 0;j < grade.length; j++){
-          if(grade[j] == temp[i].grade){
-            flag = 1;
+    },
+    handleCurrentChange(val) {
+      var self = this;
+      self.page_index = val
+      self.loadData();
+    },
+    tableformat(){
+      var self = this;
+      let tableData = self.tableData
+      console.log(tableData);
+      for(let i=0;i<tableData.length;i++){
+        tableData[i].grade += '级';
+        let majorName = {
+          render:function(key){
+            for(let i= 0; i < self.majorList.length; i++)
+              if(self.majorList[i].key == key){
+                return self.majorList[i].value
+              }
           }
         }
-        if(flag == 0){
-          grade.push(temp[i].grade)
+        tableData[i].major = majorName.render(tableData[i].major);
+        tableData[i].class_index += "班";
+        switch (tableData[i].status) {
+          case 0:
+          tableData[i].status = '尚未实习'
+          break;
+          case 1:
+          tableData[i].status = '实习中'
+          break;
+          case 2:
+          tableData[i].status = '实习完成'
+          break;
+          case 3:
+          tableData[i].status = '实习完成并已评分'
+          break;
         }
       }
-      for(let i = 0;i < grade.length; i++){
-        gradeList.push({
-          value: grade[i],
-          label: grade[i] + '级'
+    }
+  },
+  mounted(){
+    let self = this;
+    axios.get(urlConfig('majorlist'),{params: {institute: 11}})
+    .then(function (res) {
+      let majorList = [];
+      let temp = res.data.data.items;
+      for(let i = 0;i < temp.length; i++){
+        majorList.push({
+          value: temp[i].key,
+          label: temp[i].value
         })
       }
-      console.log(gradeList);
-      return gradeList
-    },
-    classList(){
-      let res = {
-        "data":{
-          "items":[{
-            "grade":12,"major":"0207",
-            "class_index":1,"classname":"12数字媒体技术1班"
-          },
-          {
-            "grade":12,"major":"0207","class_index":2,"classname":"12数字媒体技术2班"
-          },
-          {
-            "grade":13,"major":"0207","class_index":1,"classname":"13数字媒体技术1班"
-          }]
-        }
-      }
-      let classList = [];
-      let flag = 0;
+      self.majorList = majorList
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+    axios.get(urlConfig('classlist'),{params: {institute: 11}})
+    .then(function (res){
       let temp = res.data.items;
       for(let i = 0;i < temp.length; i++){
-        classList.push({
+        self.classList.push({
           value: {
             "grade": temp[i].grade,
             "major": temp[i].major,
@@ -284,30 +262,7 @@ export default {
           label: temp[i].classname
         })
       }
-      console.log(classList);
-      return classList
-    }
-  },
-  methods: {
-    loadData(){
-      console.log(this.searchform);
-      console.log(document.cookie);
-      axios.get(urlConfig("studentlist"), {params: this.searchform
     })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
-    },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
-    },
-
   }
 }
 </script>

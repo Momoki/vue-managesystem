@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  /*overflow: hidden;*/
+  overflow: hidden;
 }
 
 * {
@@ -31,6 +31,8 @@ html, body {
 
 .main {
   margin-left: 16.66667%;
+  height: 100%;
+  overflow: auto;
 }
 
 .menu {
@@ -77,7 +79,9 @@ html, body {
 }
 
 .avatar-uploader .el-upload {
+  display: block;
   margin: 0 auto;
+  width: 125px;
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
@@ -156,6 +160,7 @@ html, body {
   margin-left: 20px;
 }
 
+
 @media screen and (max-width: 800px) {
   .search .el-col-8 {
     width: 100%
@@ -188,4 +193,36 @@ html, body {
 .list .el-pagination {
   margin-top: 20px;
   text-align: right;
+}
+
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
+}
+
+.pop{
+  position: absolute;
+  z-index: 9999;
+  padding: 10px;
+  width: 90%;
+  top: 0px;
+  left: 5%;
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+.pop h4{
+  text-align: center;
+}
+.pop .close{
+  position: absolute;
+  right: 10px;
 }

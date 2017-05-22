@@ -1,6 +1,6 @@
 <template lang="html">
-  <div class="">
-    欢迎
+  <div style="text-indent:14px;margin-top:14px">
+    欢迎使用本系统
   </div>
 </template>
 

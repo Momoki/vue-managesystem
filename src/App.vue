@@ -26,17 +26,14 @@ export default {
         menu: [{
           children: [{
 
-          }],
-          icon: '',
-          id: 1,
-          name: '用户管理',
-          url: ''
+          }]
         }]
       }
     }
   },
+  methods: {
 
-  methods: {}
+  }
 }
 </script>
 
