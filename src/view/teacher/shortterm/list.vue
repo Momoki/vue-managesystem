@@ -20,6 +20,9 @@
            <el-col :span="8">
              <el-button type="primary" @click="loadData">搜索</el-button>
            </el-col>
+           <el-col :span="8">
+             <a href="/#/teacher/shortterm/add"><el-button type="primary">添加短学期</el-button></a>
+           </el-col>
          </el-row>
         </el-form>
       </div>
@@ -39,8 +42,12 @@
           prop="content">
         </el-table-column>
         <el-table-column
-          label="状态"
-          prop="status">
+          label="时间"
+          prop="date">
+        </el-table-column>
+        <el-table-column
+          label="地点"
+          prop="loca">
         </el-table-column>
         <el-table-column
           label="操作" width="160">
@@ -61,7 +68,7 @@
        :current-page.sync="currentPage"
        :page-size="10"
        layout="prev, pager, next"
-       :page-count="20">
+       :page-count="10">
       </el-pagination>
    </div>
   </div>
@@ -80,10 +87,41 @@ export default {
       },
       tableData: [{
         id: '12987122',
-        name: '信息安全课',
-        company:'安恒网络',
-        content: '教授信息安全的基本知识',
-      }],
+        name: 'zbrush体验课',
+        company:'GA游戏教育',
+        content: 'zbrush角色头部制作',
+        loca: '现教4楼机房',
+        date: '2017/02/21-2017/03/04'
+      },
+      {
+        id: '1',
+        name: '次时代游戏关卡设计 ',
+        company:'CGMoocs',
+        content: '使用3DsMax和PS完成建模及关卡设计。',
+        loca: '第一实验楼501 ',
+        date: '2017/02/21-2017/03/04'
+      },{
+        id: '1',
+        name: 'UID实训方案',
+        company:'达内',
+        content: '使用Photoshop等工具完成IOS7手机、Android手机图标的设计，完成平面海报、网页界面的设计。',
+        loca: '杭州市下沙科技园路65号',
+        date: '2017/02/21-2017/03/04'
+      },{
+        id: '1',
+        name: '植物大战僵尸',
+        company:'达内',
+        content: '使用java开发一个类似于植物大战僵尸的小游戏',
+        loca: '达内服务外包大楼',
+        date: '2017/02/21-2017/03/04'
+      },{
+        id: '1',
+        name: '简易工作流引擎',
+        company:'杭州益赛',
+        content: '该课程意在让学生了解工作流的基本概念，加深对数据库的了解，提高Java编码能力',
+        loca: '小和山水木清华',
+        date: '2017/02/21-2017/03/04'
+      },],
       pickerOptions: {
          shortcuts: [{
            text: '最近一周',

@@ -19,6 +19,7 @@ const teacher_cooperation_enterprise = r => require.ensure([], () => r(require('
 const teacher_cooperation_job = r => require.ensure([], () => r(require('./view/teacher/cooperation/job.vue')), 'group-teacher');
 // 短学期管理
 const teacher_shortterm_list = r => require.ensure([], () => r(require('./view/teacher/shortterm/list.vue')), 'group-teacher');
+const teacher_shortterm_add = r => require.ensure([], () => r(require('./view/teacher/shortterm/add.vue')), 'group-teacher');
 
 
 // 学生用户
@@ -105,6 +106,10 @@ var routes = [
   {
     path: '/student/shortterm/report',
     component: student_shortterm_report
+  },
+  {
+    path: '/teacher/shortterm/add',
+    component: teacher_shortterm_add
   }
 ];
 
