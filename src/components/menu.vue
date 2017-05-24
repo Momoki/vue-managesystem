@@ -7,7 +7,7 @@
     <h3>{{name}}</h3>
     <el-button type="text">退出登录</el-button>
   </div>
-  <el-menu v-if="role_id" class="el-menu-vertical-demo" :router="true" :unique-opened="true">
+  <el-menu v-if="role_id == 1" class="el-menu-vertical-demo" :router="true" :unique-opened="true">
     <el-submenu index="1">
       <template slot="title">学生管理</template>
       <el-menu-item-group>
@@ -50,7 +50,7 @@
     <el-submenu index="1">
       <template slot="title">简历管理</template>
       <el-menu-item-group>
-        <el-menu-item index="1-1" :route="{path: '/student/info/base'}">基本信息填写</el-menu-item>
+        <el-menu-item index="1-1" :route="{path: '/student/info/base'}">填写简历</el-menu-item>
         <el-menu-item index="1-2" :route="{path: '/student/info/upload'}">上传附件简历</el-menu-item>
       </el-menu-item-group>
     </el-submenu>
@@ -58,16 +58,16 @@
       <template slot="title">实习管理</template>
       <el-menu-item-group>
         <el-menu-item index="2-1" :route="{path: '/student/intern/job'}">申请实习岗位</el-menu-item>
-        <el-menu-item index="2-2" :route="{path: '/student/intern/weekly'}">实习周记</el-menu-item>
-        <el-menu-item index="2-2" :route="{path: '/student/intern/report'}">提交实习报告</el-menu-item>
+        <el-menu-item index="2-2" :route="{path: '/student/intern/report'}">我的实习</el-menu-item>
+        <el-menu-item index="2-3" :route="{path: '/student/intern/weekly'}">实习周记</el-menu-item>
 
       </el-menu-item-group>
     </el-submenu>
     <el-submenu index="3">
       <template slot="title">短学期管理</template>
       <el-menu-item-group>
-        <el-menu-item index="3-1" :route="{path: '/student/shortterm/list'}">选课管理</el-menu-item>
-        <el-menu-item index="3-2" :route="{path: '/student/shortterm/report'}">提交短学期报告</el-menu-item>
+        <el-menu-item index="3-1" :route="{path: '/student/shortterm/list'}">选课列表</el-menu-item>
+        <el-menu-item index="3-2" :route="{path: '/student/shortterm/report'}">我的短学期</el-menu-item>
 
       </el-menu-item-group>
     </el-submenu>

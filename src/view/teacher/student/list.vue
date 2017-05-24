@@ -148,7 +148,21 @@ export default {
         oClass: null,
       },
       form: {},
-      tableData: [],
+      tableData: [{
+        number: 120708122,
+        name: '李月',
+        grade: '12级',
+        major:'网络工程',
+        class_index:'1班',
+        status:'实习完成',
+      },{
+        number: 130706222,
+        name: '王琪',
+        grade: '13级',
+        major:'网络工程',
+        class_index:'1班',
+        status:'实习中',
+      }],
       majorList: [],
       classList: [],
     }
@@ -177,7 +191,15 @@ export default {
       var self = this;
       self.form = self.searchform;
       self.page_index = 1;
-      self.loadData()
+      self.tableData = [{
+        number: 120708122,
+        name: '李月',
+        grade: '12级',
+        major:'网络工程',
+        class_index:'1班',
+        status:'实习完成',
+      }]
+      // self.loadData()
     },
     loadData(){
       var self = this;

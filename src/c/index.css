@@ -2,7 +2,7 @@ html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 * {
@@ -225,4 +225,10 @@ html, body {
 .pop .close{
   position: absolute;
   right: 10px;
+}
+.search .el-col-24 .el-form-item .el-form-item__label{
+  width: 15%;
+}
+.search h5{
+  margin-top: 0;
 }

@@ -119,9 +119,15 @@ export default {
               show: true
             }
           },
-          data: self.location
+          data: [ {name: '湖南',value: 23 },
+                {name: '安徽',value: 12 },
+                {name: '山东',value: 14 },
+                {name: '江苏',value: 44 },
+                {name: '浙江',value: 1255 },
+                {name: '江西',value: 24 }
+              ]
         }]
-      };
+      }
       let myChart = echarts.init(document.getElementById('map'));
       myChart.setOption(option);
       myChart.on('click', function (params) {
@@ -184,39 +190,39 @@ export default {
   },
   mounted() {
     let self = this
-    axios.get( urlConfig("location")).then(function (res) {
-        console.log(res);
-        self.location = res.data.data.items;
-    });
+    // axios.get( urlConfig("location")).then(function (res) {
+    //     console.log(res);
+    //     self.location = res.data.data.items;
+    // });
     // statuslist
-    axios.get( urlConfig("statuslist"))
-    .then(function (res) {
-      console.log(res);
-      let statusname ={
-        render: function(id) {
-          switch (id) {
-            case 0:
-              return '尚未实习'
-            case 1:
-              return '实习中'
-            case 2:
-              return '实习完成'
-            case 3:
-              return '实习完成并已评分'
-          }
-        }
-      }
-      let status = res.data.data.items
-      for(let i = 0; i < status.length;i++){
-        self.statuslist.push({
-          value: status[i].total,
-          name: statusname.render(status[i].status)
-        })
-      }
+    // axios.get( urlConfig("statuslist"))
+    // .then(function (res) {
+    //   console.log(res);
+    //   let statusname ={
+    //     render: function(id) {
+    //       switch (id) {
+    //         case 0:
+    //           return '尚未实习'
+    //         case 1:
+    //           return '实习中'
+    //         case 2:
+    //           return '实习完成'
+    //         case 3:
+    //           return '实习完成并已评分'
+    //       }
+    //     }
+    //   }
+    //   let status = res.data.data.items
+    //   for(let i = 0; i < status.length;i++){
+    //     self.statuslist.push({
+    //       value: status[i].total,
+    //       name: statusname.render(status[i].status)
+    //     })
+      // }
       self.loadChart();
-    })
-    .catch(function (error) {
-    })
+    // })
+    // .catch(function (error) {
+    // })
   }
 }
 </script>

@@ -1,25 +1,22 @@
 <template lang="html">
   <div class="">
     <div style="margin-bottom:10px;padding:20px;">
-      <h2 style="margin-top:0">上传附件简历</h2>
+      <h2 style="margin-top:0">我的短学期</h2>
       <el-breadcrumb separator="/">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item>简历管理</el-breadcrumb-item>
-        <el-breadcrumb-item>上传附件简历</el-breadcrumb-item>
+        <el-breadcrumb-item>短学期管理</el-breadcrumb-item>
+        <el-breadcrumb-item>我的短学期</el-breadcrumb-item>
       </el-breadcrumb>
     </div>
-    <div class="list">
+    <div class="list search">
       <el-form>
        <el-row>
          <el-col :span="24">
-           <el-upload
-            class="upload-demo"
-            action="https://jsonplaceholder.typicode.com/posts/"
-            :file-list="fileList">
-            <el-button size="small" type="primary">上传简历</el-button>
-            <div slot="tip" class="el-upload__tip">上传PDF或doc文件</div>
-          </el-upload>
+           暂无选课记录
          </el-col>
+         <!-- <el-col :span="24">
+           你还没有开始实习。
+         </el-col> -->
        </el-row>
       </el-form>
     </div>
